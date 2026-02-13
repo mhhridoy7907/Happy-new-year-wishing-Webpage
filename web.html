@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year 2026 🌟</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  height:100vh;
+  background:#000;
+  overflow:hidden;
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* Card container */
+.card{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  padding:50px 40px;
+  border-radius:25px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  box-shadow:0 0 50px rgba(0,255,255,0.4);
+  max-width:450px;
+  width:90%;
+  transition: transform 1s ease;
+}
+
+h1{
+  font-size:2.8rem;
+  color:#00eaff;
+  text-shadow:0 0 15px #00eaff;
+  animation: electric 1.5s infinite alternate;
+}
+
+.year{
+  font-size:3.5rem;
+  margin:15px 0;
+  color:#fff;
+  text-shadow:0 0 25px #00eaff;
+  font-weight:bold;
+  transition: all 1s ease;
+}
+
+p{
+  font-size:1.1rem;
+  opacity:0.9;
+  margin-top:10px;
+}
+
+.dua{
+  margin-top:15px;
+  font-size:0.95rem;
+  color:#bffaff;
+}
+
+/* Button */
+button{
+  margin-top:20px;
+  padding:12px 30px;
+  font-size:16px;
+  border:none;
+  border-radius:30px;
+  background:#00eaff;
+  color:#000;
+  cursor:pointer;
+  box-shadow:0 0 20px #00eaff;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* Footer copyright */
+footer{
+  position:absolute;
+  bottom:10px;
+  width:100%;
+  text-align:center;
+  font-size:0.9rem;
+  color:#555;
+}
+
+/* Continuous scrolling MH Hridoy tech style */
+.marquee-container{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  height:30px;
+  margin-top:15px;
+}
+
+.marquee{
+  display:inline-block;
+  white-space:nowrap;
+  color:#00eaff;
+  font-weight:bold;
+  letter-spacing:2px;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll{
+  0% {transform:translateX(100%);}
+  100% {transform:translateX(-100%);}
+}
+
+/* Floating stars */
+.star{
+  position:absolute;
+  border-radius:50%;
+  opacity:0.8;
+  animation: rise linear infinite, twinkle 2s infinite alternate;
+}
+
+@keyframes electric{
+  from{ text-shadow:0 0 10px #00eaff;}
+  to{ text-shadow:0 0 35px #00eaff;}
+}
+
+@keyframes rise{
+  to{
+    transform:translateY(-120vh) translateX(calc(var(--drift) * 1px));
+    opacity:0;
+  }
+}
+
+@keyframes twinkle{
+  0%{opacity:0.5;}
+  50%{opacity:1;}
+  100%{opacity:0.5;}
+}
+
+/* Firework sparks */
+.firework{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background: #ff0;
+  border-radius:50%;
+  opacity:0.9;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+  0%{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+  100%{
+    transform:translate(var(--x), var(--y)) scale(0.5);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <h1 id="title">Good Bye</h1>
+  <div class="year" id="year">2025</div>
+  <p id="message">Lessons learned. Strength gained.</p>
+  <div class="dua" id="dua">
+    May Allah forgive our past and guide our future 🤍
+  </div>
+  <button onclick="celebrate()">Click Now 🎉</button>
+
+  <div class="marquee-container">
+    <div class="marquee">MH Hridoy &nbsp; MH Hridoy &nbsp; MH Hridoy &nbsp;</div>
+  </div>
+</div>
+
+<footer>© MH Hridoy</footer>
+
+<script>
+// Create floating stars
+let starInterval;
+let goldenMode = false;
+
+function createStar(){
+  const star = document.createElement("div");
+  star.className = "star";
+
+  const size = Math.random()*3 + 2; // star size 2-5px
+  star.style.width = size+"px";
+  star.style.height = size+"px";
+
+  // Check if golden mode active
+  if(goldenMode){
+    star.style.background = `rgba(255,215,0,${Math.random()*0.8+0.2})`; // golden stars
+    star.style.width = (size+1)+"px";
+    star.style.height = (size+1)+"px";
+    star.style.animationDuration = (Math.random()*2+1)+"s"; // faster
+  } else {
+    star.style.background = `rgba(0,255,255,${Math.random()*0.8+0.2})`; // normal blue
+    star.style.animationDuration = (Math.random()*5+3)+"s";
+  }
+
+  star.style.left = Math.random()*100+"vw";
+  star.style.bottom = "-10px";
+  star.style.setProperty('--drift', (Math.random()*50-25));
+
+  document.body.appendChild(star);
+  setTimeout(()=>star.remove(),10000);
+}
+
+// Regular stars
+starInterval = setInterval(createStar, 150);
+
+// Fireworks
+function createFirework(x, y){
+  const colors = ['#ff0','#ff0080','#00ffea','#ff8000','#00ff00','#ffd700'];
+  for(let i=0;i<50;i++){
+    const fw = document.createElement("div");
+    fw.className="firework";
+    fw.style.left = x + "px";
+    fw.style.top = y + "px";
+
+    const angle = Math.random()*2*Math.PI;
+    const radius = Math.random()*120 + 50;
+    const dx = Math.cos(angle)*radius + "px";
+    const dy = Math.sin(angle)*radius + "px";
+
+    fw.style.setProperty('--x', dx);
+    fw.style.setProperty('--y', dy);
+    fw.style.background = colors[Math.floor(Math.random()*colors.length)];
+
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1200);
+  }
+}
+
+// Celebrate function
+function celebrate(){
+  const title = document.getElementById('title');
+  const year = document.getElementById('year');
+  const message = document.getElementById('message');
+  const dua = document.getElementById('dua');
+  const card = document.getElementById('card');
+
+  // Update texts
+  title.innerText = "Happy New Year";
+  year.innerText = "2026";
+  message.innerText = "Wishing you joy, peace & success!";
+  dua.innerText = "May Allah bless your new year with health & happiness 🤍";
+
+  // Activate golden stars
+  goldenMode = true;
+
+  // Increase star speed
+  clearInterval(starInterval);
+  starInterval = setInterval(createStar, 50);
+
+  // Card pop
+  card.style.transform = "scale(1.1)";
+  setTimeout(()=>card.style.transform = "scale(1)",600);
+
+  // Fireworks in center
+  const centerX = window.innerWidth/2;
+  const centerY = window.innerHeight/2 - 50;
+  for(let i=0;i<7;i++){
+    setTimeout(()=>createFirework(centerX, centerY), i*300);
+  }
+
+  // Optional: Stop golden stars after some time (e.g., 10s)
+  setTimeout(()=> {
+    goldenMode = false;
+    clearInterval(starInterval);
+    starInterval = setInterval(createStar, 150);
+  },10000);
+}
+</script>
+
+</body>
+</html>
