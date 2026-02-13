@@ -2,5 +2,5 @@
 ---
 ### 1st page
 ![privew](w.png)
-###2 nd page
+### 2nd page
 ![preivew](i.png)
